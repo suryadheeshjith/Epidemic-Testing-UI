@@ -222,29 +222,89 @@ if __name__=="__main__":
     bar = st.progress(0)
     st.sidebar.write("World parameters")
     n=st.sidebar.slider("Number of agents", min_value=0 , max_value=5000 , value=1000 , step=100 , format=None , key=None )
+    st.sidebar.text("Number of agents selected : {0}".format(n))
     p=st.sidebar.slider("Probability(p) of an edge in G(n,p) random graph", min_value=0.0 , max_value=1.0 , value=0.01 , step=0.01 , format=None , key=None )
     p_range=st.sidebar.checkbox("Divide p by 10")
     if p_range:
         p/=10
-
+    st.sidebar.text("Probability selected : {0}".format(p))
     inf_per=0.01
     days=st.sidebar.slider("Number of days in simulation", min_value=1 , max_value=100 , value=30 , step=1 , format=None , key=None )
+    st.sidebar.text("Number of days selected : {0}".format(days))
     num_worlds=st.sidebar.slider("Number of times to average simulations over", min_value=1 , max_value=100 , value=1 , step=1 , format=None , key=None )
-    st.sidebar.write("Averaging simulation "+str(num_worlds)+" times over graph G("+str(n)+","+str(p)+") for "+str(days)+" days.")
+    st.sidebar.text("Number of simulations selected: {0}".format(num_worlds))
 
     st.sidebar.write("------------------------------------------------------------------------------------")
 
     st.sidebar.write("Disease parameters")
     beta=st.sidebar.slider("Rate of infection : Susceptible->Exposed", min_value=0.0 , max_value=1.0 , value=0.3 , step=0.01 , format=None , key=None )
+    st.sidebar.text("Rate of infection selected: {0}".format(beta))
     mu=st.sidebar.slider("Rate of Exposed->Infected", min_value=0.0 , max_value=1.0 , value=0.7 , step=0.01 , format=None , key=None )
+    st.sidebar.text("Rate selected: {0}".format(mu))
     gamma=st.sidebar.slider("Rate of recovery : Infected:->Recovered", min_value=0.0 , max_value=1.0 , value=0.42 , step=0.01 , format=None , key=None )
+    st.sidebar.text("Rate of recovery selected: {0}".format(gamma))
     delta=st.sidebar.slider("Rate of unimmunisation : Recovered->Susceptible", min_value=0.0 , max_value=1.0 , value=0.0 , step=0.01 , format=None , key=None )
+    st.sidebar.text("Rate of unimmunisation selected: {0}".format(delta))
 
     st.sidebar.write("------------------------------------------------------------------------------------")
     lockdown_list=[]
     for i in range(days):
         lockdown_list.append(False)
-    st.sidebar.write("Lockdown parameters")    #Average SEIR model over multiple worlds
+    ######
+    machines = {}
+    testing_methods_list = {"Normal Testing":{}, "Group Testing":{}, "Friendship Testing":{}}
+    option = None
+
+    st.sidebar.write("Testing parameters")
+    num_agents_per_step=st.sidebar.slider("Number of Agents to test every day", min_value=0 , max_value=1000 , value=100 , step=10 , format=None , key=None )
+    st.sidebar.text("Number of agents selected : {0}".format(num_agents_per_step))
+    num_distinct_tests=st.sidebar.slider("Number of distinct tests", min_value=0 , max_value=10 , value=1 , step=1 , format=None , key=None)
+    st.sidebar.text("Number of distict tests selected : {0}".format(num_distinct_tests))
+    for i in range(num_distinct_tests):
+        st.sidebar.write("Test Type "+str(i+1))
+        machines['Test'+str(i+1)] = {}
+
+        cost = st.sidebar.slider("Cost of test", min_value=1 , max_value=1000 , value=1 , step=1, key=i)
+        st.sidebar.text("Cost selected : {0}".format(cost))
+        false_positive_rate=st.sidebar.slider("False Positive Rate", min_value=0.0 , max_value=1.0 , value=0.0 , step=0.01, key=i)
+        st.sidebar.text("False Positive Rate selected : {0}".format(false_positive_rate))
+        false_negative_rate=st.sidebar.slider("False Negative Rate", min_value=0.0 , max_value=1.0 , value=0.0 , step=0.01, key=i)
+        st.sidebar.text("False Negative Rate selected : {0}".format(false_negative_rate))
+        turnaround_time=st.sidebar.slider("Turnaround time (Steps for the test to complete)", min_value=0 , max_value=100 , value=0 , step=1, key=i)
+        st.sidebar.text("Turnaround time selected : {0}".format(turnaround_time))
+        capacity=st.sidebar.slider("Maximum tests done per step", min_value=1 , max_value=1000 , value=1 , step=1, key=i)
+        st.sidebar.text("Maximum tests selected : {0}".format(capacity))
+
+        machines['Test'+str(i+1)]['cost'] = cost
+        machines['Test'+str(i+1)]['false_positive_rate'] = false_positive_rate
+        machines['Test'+str(i+1)]['false_negative_rate'] = false_negative_rate
+        machines['Test'+str(i+1)]['turnaround_time'] = turnaround_time
+        machines['Test'+str(i+1)]['capacity'] = capacity
+
+    option = st.sidebar.selectbox('Choose Testing Method',list(testing_methods_list.keys()))
+    st.sidebar.text("Method selected : {0}".format(option))
+
+    if(option=="Normal Testing"):
+        testing_methods_list[option] = True
+
+    elif(option=="Group Testing"):
+        num_agents = st.sidebar.slider("Number of agents per test", min_value=1 , max_value=15 , value=1 , step=1)
+        st.sidebar.text("Agents per test selected : {0}".format(num_agents))
+        num_tests = st.sidebar.slider("Number of tests per agent", min_value=1 , max_value=15 , value=1 , step=1)
+        st.sidebar.text("Tests per agent selected : {0}".format(num_tests))
+
+        testing_methods_list[option]["num_agents_per_test"] = num_agents
+        testing_methods_list[option]["num_tests_per_agent"] = num_tests
+
+    elif(option=="Friendship Testing"):
+        min_days = st.sidebar.slider("Minimum days for agent to test again", min_value=1 , max_value=100 , value=5 , step=1)
+        st.sidebar.text("Minimum days selected : {0}".format(min_days))
+        testing_methods_list[option]["min_days"] = min_days
+
+
+
+
+    ######
     num_lockdowns=st.sidebar.slider("Number of lockdowns", min_value=0 , max_value=10 , value=1 , step=1 , format=None , key=None )
     for i in range(num_lockdowns):
         a,b = st.slider("Select Lockdown Range for Lockdown "+str(i+1), 1,days, (1,1), 1)
