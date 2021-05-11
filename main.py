@@ -220,6 +220,7 @@ if __name__=="__main__":
 
     latest_iteration = st.text("Ready!")
     bar = st.progress(0)
+
     st.sidebar.write("World parameters")
     n=st.sidebar.slider("Number of agents", min_value=0 , max_value=5000 , value=1000 , step=100 , format=None , key=None )
     st.sidebar.text("Number of agents selected : {0}".format(n))
@@ -247,10 +248,7 @@ if __name__=="__main__":
     st.sidebar.text("Rate of unimmunisation selected: {0}".format(delta))
 
     st.sidebar.write("------------------------------------------------------------------------------------")
-    lockdown_list=[]
-    for i in range(days):
-        lockdown_list.append(False)
-    ######
+
     machines = {}
     testing_methods_list = {"Normal Testing":{}, "Group Testing":{}, "Friendship Testing":{}}
     option = None
@@ -272,7 +270,7 @@ if __name__=="__main__":
         st.sidebar.text("False Negative Rate selected : {0}".format(false_negative_rate))
         turnaround_time=st.sidebar.slider("Turnaround time (Steps for the test to complete)", min_value=0 , max_value=100 , value=0 , step=1, key=i)
         st.sidebar.text("Turnaround time selected : {0}".format(turnaround_time))
-        capacity=st.sidebar.slider("Maximum tests done per step", min_value=1 , max_value=1000 , value=1 , step=1, key=i)
+        capacity=st.sidebar.slider("Maximum tests done by Test {0} per day".format(i), min_value=1 , max_value=1000 , value=1 , step=1, key=i)
         st.sidebar.text("Maximum tests selected : {0}".format(capacity))
 
         machines['Test'+str(i+1)]['cost'] = cost
@@ -282,7 +280,6 @@ if __name__=="__main__":
         machines['Test'+str(i+1)]['capacity'] = capacity
 
     option = st.sidebar.selectbox('Choose Testing Method',list(testing_methods_list.keys()))
-    st.sidebar.text("Method selected : {0}".format(option))
 
     if(option=="Normal Testing"):
         testing_methods_list[option] = True
@@ -304,16 +301,19 @@ if __name__=="__main__":
     st.sidebar.write("Lockdown parameters")
     num_days_lockdown = st.sidebar.slider("Number of days to lockdown agent when tested positive", min_value=0 , max_value=100 , value=5 , step=1)
     st.sidebar.text("Lockdown days selected : {0}".format(num_days_lockdown))
+    st.sidebar.write("------------------------------------------------------------------------------------")
 
 
     ######
-    num_lockdowns=st.sidebar.slider("Number of lockdowns", min_value=0 , max_value=10 , value=1 , step=1 , format=None , key=None )
-    for i in range(num_lockdowns):
-        a,b = st.slider("Select Lockdown Range for Lockdown "+str(i+1), 1,days, (1,1), 1)
-        for i in range(a,b+1):
-            lockdown_list[i-1]=True
-    cum_inf, cum_ld = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iteration,bar)
 
+    lockdown_list=[]
+    for i in range(days):
+        lockdown_list.append(False)
+
+
+    cum_inf, cum_ld = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iteration,bar)
+    ######
+    
     latest_iteration.text('Ready!')
     bar.progress(0)
 
