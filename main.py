@@ -110,14 +110,6 @@ class Simulate():
             agent.state=new_state
             self.state_list[agent.state].append(agent.index)
 
-    def plot(self):
-        for state in self.state_history.keys():
-            plt.plot(self.state_history[state])
-        plt.plot(self.quarantine_history)
-
-        plt.title('SEYAR plot')
-        plt.legend(list(self.state_history.keys()),loc='upper right', shadow=True)
-        plt.show()
 
 
 def world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,lockdown_list):
@@ -186,7 +178,7 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iter
         tdict[state]=[0]*(days+1)
 
     for i in range(number):
-        latest_iteration.text('World : {0}'.format(i+1))
+        latest_iteration.text('Simulating World : {0}'.format(i+1))
         bar.progress(i + 1)
         graph_obj = RandomGraph(n,p,True)
         sdict = world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,lockdown_list)
@@ -220,12 +212,13 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iter
 
 if __name__=="__main__":
     st.write("""
-    # Optimising lockdowns
-    Multiple lockdowns in a SEIRS model on a G(n,p) random graph.
+    # Testing Policy
+    Experiment with different testing policies with an SEIRS model on a G(n,p) random graph.
+    Use the sidebar to set parameters!
     """)
     st.write("------------------------------------------------------------------------------------")
 
-    latest_iteration = st.text("Simulation")
+    latest_iteration = st.text("Ready!")
     bar = st.progress(0)
     st.sidebar.write("World parameters")
     n=st.sidebar.slider("Number of agents", min_value=0 , max_value=5000 , value=1000 , step=100 , format=None , key=None )
@@ -258,6 +251,9 @@ if __name__=="__main__":
         for i in range(a,b+1):
             lockdown_list[i-1]=True
     cum_inf, cum_ld = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iteration,bar)
+
+    latest_iteration.text('Ready!')
+    bar.progress(0)
 
     st.write("------------------------------------------------------------------------------------")
 
