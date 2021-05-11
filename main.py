@@ -261,7 +261,7 @@ if __name__=="__main__":
     num_distinct_tests=st.sidebar.slider("Number of distinct tests", min_value=0 , max_value=10 , value=1 , step=1 , format=None , key=None)
     st.sidebar.text("Number of distict tests selected : {0}".format(num_distinct_tests))
     for i in range(num_distinct_tests):
-        st.sidebar.write("Test Type "+str(i+1))
+        st.sidebar.text("Test Type {0}".format(i+1))
         machines['Test'+str(i+1)] = {}
 
         cost = st.sidebar.slider("Cost of test", min_value=1 , max_value=1000 , value=1 , step=1, key=i)
@@ -301,7 +301,9 @@ if __name__=="__main__":
         st.sidebar.text("Minimum days selected : {0}".format(min_days))
         testing_methods_list[option]["min_days"] = min_days
 
-
+    st.sidebar.write("Lockdown parameters")
+    num_days_lockdown = st.sidebar.slider("Number of days to lockdown agent when tested positive", min_value=0 , max_value=100 , value=5 , step=1)
+    st.sidebar.text("Lockdown days selected : {0}".format(num_days_lockdown))
 
 
     ######
