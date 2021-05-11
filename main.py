@@ -224,7 +224,7 @@ if __name__=="__main__":
     st.sidebar.write("World parameters")
     n=st.sidebar.slider("Number of agents", min_value=0 , max_value=5000 , value=1000 , step=100 , format=None , key=None )
     st.sidebar.text("Number of agents selected : {0}".format(n))
-    p=st.sidebar.select_slider("Probability(p) of an edge in G(n,p) random graph", options = list(np.linspace(0,1,1000)), value= 0.1)
+    p=st.sidebar.select_slider("Probability(p) of an edge in G(n,p) random graph", value = 0.1, options = list(np.linspace(0,1,101)))
     p_range=st.sidebar.checkbox("Divide p by 10")
     if p_range:
         p/=10
