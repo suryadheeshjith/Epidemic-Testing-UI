@@ -3,6 +3,8 @@ import copy
 import streamlit as st
 import numpy as np
 import pandas as pd
+import Testing_Policy
+import Lockdown_Policy
 
 class Agent():
     def __init__(self,state,index):
@@ -10,6 +12,9 @@ class Agent():
         self.index=index
         self.neighbours=[]
         self.quarantined=False
+
+        self.testing_hist=[]
+        self.quarantine_list = []
 
 
 class RandomGraph():
@@ -43,15 +48,22 @@ class RandomGraph():
         self.average_degree=2*dsum/n
 
 class Simulate():
-    def __init__(self,graph_obj,agents,transmission_probability,lockdown_list):
+    def __init__(self,graph_obj,agents,transmission_probability,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown):
         self.graph_obj=graph_obj
         self.agents=agents
         self.transmission_probability=transmission_probability
-        self.lockdown_list=lockdown_list
         self.state_list={}
         self.state_history={}
         self.quarantine_list=[]
         self.quarantine_history=[]
+
+        # Testing
+        self.machines = machines
+        self.option = option
+        self.testing_methods_list = testing_methods_list
+        self.num_agents_per_step = num_agents_per_step
+        self.num_days_lockdown = num_days_lockdown
+
 
         for state in transmission_probability.keys():
             self.state_list[state]=[]
@@ -61,24 +73,65 @@ class Simulate():
             self.state_list[agent.state].append(agent.index)
 
         self.update()
+        self.init_testing()
 
-    def simulate_day(self,day):
-        self.spread(day)
-        self.update()
+    def update(self):
+        for state in self.state_history.keys():
+            self.state_history[state].append(len(self.state_list[state]))
+        self.quarantine_history.append(len(self.quarantine_list))
+
+    def init_testing(self):
+
+        self.testing_policy = Testing_Policy.Test_Policy(lambda x:self.num_agents_per_step)
+        for machine in machines.keys():
+            self.testing_policy.add_machine(machine,machines[machine]["cost"],machines[machine]["false_positive_rate"],\
+                                            machines[machine]["false_negative_rate"],machines[machine]["turnaround_time"],machines[machine]["capacity"])
+
+
+
+        if(self.option=="Normal Testing"):
+            self.testing_policy.set_register_agent_testtube_func(self.testing_policy.random_agents(1,1))
+
+        elif(self.option=="Group Testing"):
+            num_agents_per_test = self.testing_methods_list[option]["num_agents_per_test"]
+            num_tests_per_agent = self.testing_methods_list[option]["num_tests_per_agent"]
+            self.testing_policy.set_register_agent_testtube_func(self.testing_policy.random_agents(num_agents_per_test,num_tests_per_agent))
+
+        elif(self.option=="Friendship Testing"):
+            min_days = self.testing_methods_list[option]["min_days"]
+            self.testing_policy.set_register_agent_testtube_func(self.testing_policy.friendship_testing(min_days))
+
+
+        self.lockdown_policy = Lockdown_Policy.agent_policy_based_lockdown("Testing",["Positive"],lambda x:True,self.num_days_lockdown)
+
 
     def simulate_days(self,days):
         for day in range(days):
             self.simulate_day(day)
 
+    def simulate_day(self,day):
+        self.new_day()
+        self.enact_policy(day)
+        self.spread(day)
+        self.update()
+
+    def new_day(self):
+        for agent in self.agents:
+            agent.quarantined = False
+
+    def enact_policy(self,day):
+        self.testing_policy.enact_policy(day,self.agents)
+        self.lockdown_policy.enact_policy(day,self.agents)
+
+
     def spread(self,day):
         #Inf : Sus ->2bExp
         to_beExposed=[]
-        if not self.lockdown_list[day]:
-            for agent_indx in self.state_list['Susceptible']:
-                agent=self.agents[agent_indx]
-                p_inf=self.transmission_probability['Susceptible']['Exposed'](agent,agent.neighbours)
-                if random.random()<p_inf:
-                    to_beExposed.append(agent_indx)
+        for agent_indx in self.state_list['Susceptible']:
+            agent=self.agents[agent_indx]
+            p_inf=self.transmission_probability['Susceptible']['Exposed'](agent,agent.neighbours)
+            if random.random()<p_inf:
+                to_beExposed.append(agent_indx)
         # Inf ->Rec
         for agent_indx in self.state_list['Infected']:
             agent=self.agents[agent_indx]
@@ -89,20 +142,12 @@ class Simulate():
         for agent_indx in self.state_list['Exposed']:
             agent=self.agents[agent_indx]
             p1=self.transmission_probability['Exposed']['Infected'](agent,agent.neighbours)
-            r=random.random()
-            if r<p1:
-                self.convert_state(agent,'Infected',p1)
+            self.convert_state(agent,'Infected',p1)
 
         #2bExp->Exp
         for agent_indx in to_beExposed:
             agent=self.agents[agent_indx]
             self.convert_state(agent,'Exposed',1)
-
-
-    def update(self):
-        for state in self.state_history.keys():
-            self.state_history[state].append(len(self.state_list[state]))
-        self.quarantine_history.append(len(self.quarantine_list))
 
     def convert_state(self,agent,new_state,p):
         if random.random()<p:
@@ -112,7 +157,7 @@ class Simulate():
 
 
 
-def world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,lockdown_list):
+def world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown):
     #print("Average degree : ",graph_obj.average_degree)
     agents=[]
     for i in range(n):
@@ -157,9 +202,9 @@ def world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,lockdown_list):
     transmission_prob['Infected']['Recovered']= p_standard(gamma)
     transmission_prob['Recovered']['Susceptible']= p_standard(delta)
 
-    sim_obj=Simulate(graph_obj,agents,transmission_prob,lockdown_list)
+    sim_obj=Simulate(graph_obj,agents,transmission_prob,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
     sim_obj.simulate_days(days)
-    return sim_obj.state_history
+    return sim_obj.state_history, agents
 
 def average(tdict,number):
     for k in tdict.keys():
@@ -169,24 +214,48 @@ def average(tdict,number):
 
     return tdict
 
-def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iteration,bar):
-    cum_inf=0
-    cum_ld=0
+def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown):
+
     individual_types=['Susceptible','Exposed','Infected','Recovered']
     tdict={}
+    total_quarantined_days = 0
+    wrongly_quarantined_days = 0
+    total_infection = 0
+
     for state in individual_types:
         tdict[state]=[0]*(days+1)
 
     for i in range(number):
+        random.seed(number)
         latest_iteration.text('Simulating World : {0}'.format(i+1))
         bar.progress(i + 1)
         graph_obj = RandomGraph(n,p,True)
-        sdict = world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,lockdown_list)
+        sdict,agents = world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
+
+
+        for agent in agents:
+            for truth in agent.quarantine_list:
+                if(truth=="Right"):
+                    total_quarantined_days+=1
+                elif(truth=="Wrong"):
+                    total_quarantined_days+=1
+                    wrongly_quarantined_days+=1
+
+        total_infection+=len(agents)-sdict["Susceptible"][-1]
+
         for state in individual_types:
             for j in range(len(tdict[state])):
                 tdict[state][j]+=sdict[state][j]
 
     tdict=average(tdict,number)
+
+    total_infection /=number
+    total_quarantined_days /=number
+    wrongly_quarantined_days/=number
+
+    print("Total Infections : ",total_infection)
+    print("Total quarantined days : ",total_quarantined_days)
+    print("Wrongly quarantined days : ",wrongly_quarantined_days)
 
     values=[]
     keys=individual_types
@@ -201,16 +270,11 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iter
     columns=keys)
     st.line_chart(chart_data)
 
-    for i in range(days):
-        cum_inf+=tdict['Infected'][i+1]
+    return total_infection, total_quarantined_days, wrongly_quarantined_days
 
-    for i in lockdown_list:
-        if i:
-            cum_ld+=n
-
-    return cum_inf,cum_ld
 
 if __name__=="__main__":
+
     st.write("""
     # Testing Policy
     Experiment with different testing policies with an SEIRS model on a G(n,p) random graph.
@@ -230,7 +294,7 @@ if __name__=="__main__":
     if p_range:
         p/=10
     #st.sidebar.text("Probability selected : {0}".format(p))
-    inf_per=0.01
+
     days=st.sidebar.slider("Number of days in simulation", min_value=1 , max_value=100 , value=30 , step=1 , format=None , key=None )
     #st.sidebar.text("Number of days selected : {0}".format(days))
     num_worlds=st.sidebar.slider("Number of times to average simulations over", min_value=1 , max_value=100 , value=1 , step=1 , format=None , key=None )
@@ -253,13 +317,13 @@ if __name__=="__main__":
 
         cost = st.sidebar.slider("Cost of test", min_value=1 , max_value=1000 , value=1 , step=1, key=i)
         #st.sidebar.text("Cost selected : {0}".format(cost))
-        false_positive_rate=st.sidebar.slider("False Positive Rate", min_value=0.0 , max_value=1.0 , value=0.01 , step=0.01, key=i)
+        false_positive_rate=st.sidebar.slider("False Positive Rate", min_value=0.0 , max_value=1.0 , value=0.0 , step=0.01, key=i)
         #st.sidebar.text("False Positive Rate selected : {0}".format(false_positive_rate))
-        false_negative_rate=st.sidebar.slider("False Negative Rate", min_value=0.0 , max_value=1.0 , value=0.01 , step=0.01, key=i)
+        false_negative_rate=st.sidebar.slider("False Negative Rate", min_value=0.0 , max_value=1.0 , value=0.0 , step=0.01, key=i)
         #st.sidebar.text("False Negative Rate selected : {0}".format(false_negative_rate))
         turnaround_time=st.sidebar.slider("Turnaround time (Steps for the test to complete)", min_value=0 , max_value=100 , value=0 , step=1, key=i)
         #st.sidebar.text("Turnaround time selected : {0}".format(turnaround_time))
-        capacity=st.sidebar.slider("Maximum tests done by Test {0} per day".format(i), min_value=1 , max_value=1000 , value=1 , step=1, key=i)
+        capacity=st.sidebar.slider("Maximum tests done by Test {0} per day".format(i), min_value=1 , max_value=1000 , value=20 , step=1, key=i)
         #st.sidebar.text("Maximum tests selected : {0}".format(capacity))
 
         machines['Test'+str(i+1)]['cost'] = cost
@@ -294,6 +358,9 @@ if __name__=="__main__":
     st.sidebar.write("------------------------------------------------------------------------------------")
 
     st.sidebar.write("Disease parameters")
+    # inf_per=0.01
+    inf_per = st.sidebar.slider("Initial prevalence of infection", min_value=0.0 , max_value=1.0 , value=0.01 , step=0.01 , format=None , key=None )
+
     beta=st.sidebar.slider("Rate of infection : Susceptible->Exposed", min_value=0.0 , max_value=1.0 , value=0.3 , step=0.01 , format=None , key=None )
     #st.sidebar.text("Rate of infection selected: {0}".format(beta))
     mu=st.sidebar.slider("Rate of Exposed->Infected", min_value=0.0 , max_value=1.0 , value=0.7 , step=0.01 , format=None , key=None )
@@ -305,31 +372,23 @@ if __name__=="__main__":
 
     st.sidebar.write("------------------------------------------------------------------------------------")
 
-
-    ######
-
-    lockdown_list=[]
-    for i in range(days):
-        lockdown_list.append(False)
-
-
-    cum_inf, cum_ld = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,lockdown_list,latest_iteration,bar)
-    ######
+    total_infection, total_quarantined_days, wrongly_quarantined_days = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
 
     latest_iteration.text('Ready!')
     bar.progress(0)
-
     st.write("------------------------------------------------------------------------------------")
 
-    st.header("Cost Function")
+    st.header("Cost")
     st.write("Goal is to minimise the cost function :")
-    st.write("Cost function =  a(Cumulative Infected days) + b(Cumulative Lockdown days)")
+    st.write("Cost function =  a(Cumulative Infected persons) + b(Cumulative Wrongly Quarantined days) + c(Cumulative Rightly Quarantined Days)")
     st.write(" -- 'a' refers to medical cost per infected per day")
-    st.write(" -- 'b' refers to economic loss of lockdown of an agent per day")
+    st.write(" -- 'b' refers to the loss by wrongly quarantining a healthy agent per day")
+    st.write(" -- 'c' refers to economic loss of lockdown of an agent per day")
 
     st.write("------------------------------------------------------------------------------------")
 
-    a=st.slider("Medical cost per infected per day", min_value=1 , max_value=100 , value=5 , step=1 , format=None , key=None )
-    b=st.slider("Economic loss during lockdown per individual per day", min_value=1 , max_value=100 , value=1 , step=1 , format=None , key=None )
+    a=st.slider("Medical cost per infected per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
+    b=st.slider("Loss by wrongly quarantining a healthy agent per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
+    c=st.slider("Economic loss during lockdown per individual per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
 
-    st.write("The Cumulative cost is "+str(a*cum_inf+b*cum_ld))
+    st.write("The Cumulative cost is "+str(a*total_infection+b*wrongly_quarantined_days+c*(total_quarantined_days - wrongly_quarantined_days)))
