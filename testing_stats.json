@@ -1,722 +1,722 @@
 {
     "0": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 80
+            "Ready Queue Length": 0
         }
     },
     "1": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 160
+            "Ready Queue Length": 0
         }
     },
     "2": {
-        "Total Tests": 20,
-        "Total Positive Results": 7,
-        "Total Negative Results": 13,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 7,
-            "Number of Negative Results": 13,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 240
+            "Ready Queue Length": 0
         }
     },
     "3": {
-        "Total Tests": 20,
-        "Total Positive Results": 4,
-        "Total Negative Results": 16,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 4,
-            "Number of Negative Results": 16,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 320
+            "Ready Queue Length": 0
         }
     },
     "4": {
-        "Total Tests": 20,
-        "Total Positive Results": 10,
-        "Total Negative Results": 10,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 10,
-            "Number of Negative Results": 10,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 400
+            "Ready Queue Length": 0
         }
     },
     "5": {
-        "Total Tests": 20,
-        "Total Positive Results": 8,
-        "Total Negative Results": 12,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 8,
-            "Number of Negative Results": 12,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 480
+            "Ready Queue Length": 0
         }
     },
     "6": {
-        "Total Tests": 20,
-        "Total Positive Results": 11,
-        "Total Negative Results": 9,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 11,
-            "Number of Negative Results": 9,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 560
+            "Ready Queue Length": 0
         }
     },
     "7": {
-        "Total Tests": 20,
-        "Total Positive Results": 6,
-        "Total Negative Results": 14,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 6,
-            "Number of Negative Results": 14,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 640
+            "Ready Queue Length": 0
         }
     },
     "8": {
-        "Total Tests": 20,
-        "Total Positive Results": 4,
-        "Total Negative Results": 16,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 4,
-            "Number of Negative Results": 16,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 720
+            "Ready Queue Length": 0
         }
     },
     "9": {
-        "Total Tests": 20,
-        "Total Positive Results": 6,
-        "Total Negative Results": 14,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 6,
-            "Number of Negative Results": 14,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 800
+            "Ready Queue Length": 0
         }
     },
     "10": {
-        "Total Tests": 20,
-        "Total Positive Results": 2,
-        "Total Negative Results": 18,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 2,
-            "Number of Negative Results": 18,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 880
+            "Ready Queue Length": 0
         }
     },
     "11": {
-        "Total Tests": 20,
-        "Total Positive Results": 2,
-        "Total Negative Results": 18,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 2,
-            "Number of Negative Results": 18,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 960
+            "Ready Queue Length": 0
         }
     },
     "12": {
-        "Total Tests": 20,
-        "Total Positive Results": 5,
-        "Total Negative Results": 15,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 5,
-            "Number of Negative Results": 15,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1040
+            "Ready Queue Length": 0
         }
     },
     "13": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1120
+            "Ready Queue Length": 0
         }
     },
     "14": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1200
+            "Ready Queue Length": 0
         }
     },
     "15": {
-        "Total Tests": 20,
-        "Total Positive Results": 1,
-        "Total Negative Results": 19,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 1,
-            "Number of Negative Results": 19,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1280
+            "Ready Queue Length": 0
         }
     },
     "16": {
-        "Total Tests": 20,
-        "Total Positive Results": 2,
-        "Total Negative Results": 18,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 2,
-            "Number of Negative Results": 18,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1360
+            "Ready Queue Length": 0
         }
     },
     "17": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1440
+            "Ready Queue Length": 0
         }
     },
     "18": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1520
+            "Ready Queue Length": 0
         }
     },
     "19": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1600
+            "Ready Queue Length": 0
         }
     },
     "20": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1680
+            "Ready Queue Length": 0
         }
     },
     "21": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1760
+            "Ready Queue Length": 0
         }
     },
     "22": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1840
+            "Ready Queue Length": 0
         }
     },
     "23": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 1920
+            "Ready Queue Length": 0
         }
     },
     "24": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 2000
+            "Ready Queue Length": 0
         }
     },
     "25": {
-        "Total Tests": 20,
-        "Total Positive Results": 1,
-        "Total Negative Results": 19,
-        "Total Agents Tested": 20,
+        "Total Tests": 0,
+        "Total Positive Results": 0,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
-            "Number of Positive Results": 1,
-            "Number of Negative Results": 19,
-            "Number of Agents Tested": 20
+            "Number of Tests": 0,
+            "Number of Positive Results": 0,
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 2080
+            "Ready Queue Length": 0
         }
     },
     "26": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 2160
+            "Ready Queue Length": 0
         }
     },
     "27": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 2240
+            "Ready Queue Length": 0
         }
     },
     "28": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 2320
+            "Ready Queue Length": 0
         }
     },
     "29": {
-        "Total Tests": 20,
+        "Total Tests": 0,
         "Total Positive Results": 0,
-        "Total Negative Results": 20,
-        "Total Agents Tested": 20,
+        "Total Negative Results": 0,
+        "Total Agents Tested": 0,
         "Test1": {
-            "Number of Tests": 20,
+            "Number of Tests": 0,
             "Number of Positive Results": 0,
-            "Number of Negative Results": 20,
-            "Number of Agents Tested": 20
+            "Number of Negative Results": 0,
+            "Number of Agents Tested": 0
         },
         "Process": {
             "Test1": {
-                "<Testing_Policy.Machine object at 0x7fe7e8efef98>": {
+                "<Testing_Policy.Machine object at 0x7fcc3dbf5f98>": {
                     "Running Status": "On Standby",
                     "Filled Status": "Empty"
                 }
             },
             "All Testubes filled": true,
-            "All Testubes in machine": false,
+            "All Testubes in machine": true,
             "All Machines running": false,
-            "Ready Queue Length": 2400
+            "Ready Queue Length": 0
         }
     }
 }

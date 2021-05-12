@@ -82,27 +82,28 @@ class Simulate():
 
     def init_testing(self):
 
-        self.testing_policy = Testing_Policy.Test_Policy(lambda x:self.num_agents_per_step)
-        for machine in machines.keys():
-            self.testing_policy.add_machine(machine,machines[machine]["cost"],machines[machine]["false_positive_rate"],\
-                                            machines[machine]["false_negative_rate"],machines[machine]["turnaround_time"],machines[machine]["capacity"])
+        if(self.machines):
+            self.testing_policy = Testing_Policy.Test_Policy(lambda x:self.num_agents_per_step)
+            for machine in self.machines.keys():
+                self.testing_policy.add_machine(machine,machines[machine]["cost"],machines[machine]["false_positive_rate"],\
+                                                machines[machine]["false_negative_rate"],machines[machine]["turnaround_time"],machines[machine]["capacity"])
 
 
 
-        if(self.option=="Normal Testing"):
-            self.testing_policy.set_register_agent_testtube_func(self.testing_policy.random_agents(1,1))
+            if(self.option=="Normal Testing"):
+                self.testing_policy.set_register_agent_testtube_func(self.testing_policy.random_agents(1,1))
 
-        elif(self.option=="Group Testing"):
-            num_agents_per_test = self.testing_methods_list[option]["num_agents_per_test"]
-            num_tests_per_agent = self.testing_methods_list[option]["num_tests_per_agent"]
-            self.testing_policy.set_register_agent_testtube_func(self.testing_policy.random_agents(num_agents_per_test,num_tests_per_agent))
+            elif(self.option=="Group Testing"):
+                num_agents_per_test = self.testing_methods_list[option]["num_agents_per_test"]
+                num_tests_per_agent = self.testing_methods_list[option]["num_tests_per_agent"]
+                self.testing_policy.set_register_agent_testtube_func(self.testing_policy.random_agents(num_agents_per_test,num_tests_per_agent))
 
-        elif(self.option=="Friendship Testing"):
-            min_days = self.testing_methods_list[option]["min_days"]
-            self.testing_policy.set_register_agent_testtube_func(self.testing_policy.friendship_testing(min_days))
+            elif(self.option=="Friendship Testing"):
+                min_days = self.testing_methods_list[option]["min_days"]
+                self.testing_policy.set_register_agent_testtube_func(self.testing_policy.friendship_testing(min_days))
 
 
-        self.lockdown_policy = Lockdown_Policy.agent_policy_based_lockdown("Testing",["Positive"],lambda x:True,self.num_days_lockdown)
+            self.lockdown_policy = Lockdown_Policy.agent_policy_based_lockdown("Testing",["Positive"],lambda x:True,self.num_days_lockdown)
 
 
     def simulate_days(self,days):
@@ -120,8 +121,9 @@ class Simulate():
             agent.quarantined = False
 
     def enact_policy(self,day):
-        self.testing_policy.enact_policy(day,self.agents)
-        self.lockdown_policy.enact_policy(day,self.agents)
+        if(self.machines):
+            self.testing_policy.enact_policy(day,self.agents)
+            self.lockdown_policy.enact_policy(day,self.agents)
 
 
     def spread(self,day):
@@ -305,6 +307,7 @@ if __name__=="__main__":
     machines = {}
     testing_methods_list = {"Normal Testing":{}, "Group Testing":{}, "Friendship Testing":{}}
     option = None
+    num_days_lockdown = 0
 
     st.sidebar.write("Testing parameters")
     num_agents_per_step=st.sidebar.slider("Number of Agents to test every day", min_value=0 , max_value=1000 , value=100 , step=10 , format=None , key=None )
@@ -332,28 +335,33 @@ if __name__=="__main__":
         machines['Test'+str(i+1)]['turnaround_time'] = turnaround_time
         machines['Test'+str(i+1)]['capacity'] = capacity
 
-    option = st.sidebar.radio('Choose Testing Method',list(testing_methods_list.keys()))
+    if(num_distinct_tests):
+        option = st.sidebar.radio('Choose Testing Method',list(testing_methods_list.keys()))
 
-    if(option=="Normal Testing"):
-        testing_methods_list[option] = True
+        if(option=="Normal Testing"):
+            testing_methods_list[option] = True
 
-    elif(option=="Group Testing"):
-        num_agents = st.sidebar.slider("Number of agents per test", min_value=1 , max_value=15 , value=1 , step=1)
-        #st.sidebar.text("Agents per test selected : {0}".format(num_agents))
-        num_tests = st.sidebar.slider("Number of tests per agent", min_value=1 , max_value=15 , value=1 , step=1)
-        #st.sidebar.text("Tests per agent selected : {0}".format(num_tests))
+        elif(option=="Group Testing"):
+            num_agents = st.sidebar.slider("Number of agents per test", min_value=1 , max_value=15 , value=1 , step=1)
+            #st.sidebar.text("Agents per test selected : {0}".format(num_agents))
+            num_tests = st.sidebar.slider("Number of tests per agent", min_value=1 , max_value=15 , value=1 , step=1)
+            #st.sidebar.text("Tests per agent selected : {0}".format(num_tests))
 
-        testing_methods_list[option]["num_agents_per_test"] = num_agents
-        testing_methods_list[option]["num_tests_per_agent"] = num_tests
+            testing_methods_list[option]["num_agents_per_test"] = num_agents
+            testing_methods_list[option]["num_tests_per_agent"] = num_tests
 
-    elif(option=="Friendship Testing"):
-        min_days = st.sidebar.slider("Minimum days for agent to test again", min_value=1 , max_value=100 , value=5 , step=1)
-        #st.sidebar.text("Minimum days selected : {0}".format(min_days))
-        testing_methods_list[option]["min_days"] = min_days
+        elif(option=="Friendship Testing"):
+            min_days = st.sidebar.slider("Minimum days for agent to test again", min_value=1 , max_value=100 , value=5 , step=1)
+            #st.sidebar.text("Minimum days selected : {0}".format(min_days))
+            testing_methods_list[option]["min_days"] = min_days
 
-    st.sidebar.write("Lockdown parameters")
-    num_days_lockdown = st.sidebar.slider("Number of days to lockdown agent when tested positive", min_value=0 , max_value=100 , value=5 , step=1)
-    #st.sidebar.text("Lockdown days selected : {0}".format(num_days_lockdown))
+        st.sidebar.write("Lockdown parameters")
+        num_days_lockdown = st.sidebar.slider("Number of days to lockdown agent when tested positive", min_value=0 , max_value=100 , value=5 , step=1)
+        #st.sidebar.text("Lockdown days selected : {0}".format(num_days_lockdown))
+    else:
+        no_tests_text = st.sidebar.empty()
+        no_tests_text.text("No testing done!")
+
 
     st.sidebar.write("------------------------------------------------------------------------------------")
 
