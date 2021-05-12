@@ -395,7 +395,7 @@ if __name__=="__main__":
 
     st.header("Cost")
     st.write("Goal is to minimise the cost function :")
-    st.write("Cost function =  a(Cumulative Infected persons) + b(Cumulative Quarantined Days) + Cumulative Cost of Tests per day")
+    st.latex(r'''Cost\ function =  a \times Cumulative\ Infected\ persons + b \times Cumulative\ Quarantined\ Days \\+ Cumulative\ Cost\ of\ Tests\ per\ day''')
     st.write(" -- 'a' refers to medical cost per infected per day")
     st.write(" -- 'b' refers to economic loss of lockdown of an agent per day")
 
