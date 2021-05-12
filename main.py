@@ -274,6 +274,12 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
 
     return total_infection, total_quarantined_days, wrongly_quarantined_days
 
+def get_total_machine_cost(machines):
+    total_cost = 0
+    for machine in machines.keys():
+        total_cost += machines[machine]['cost']
+    return total_cost
+
 
 if __name__=="__main__":
 
@@ -326,7 +332,7 @@ if __name__=="__main__":
         #st.sidebar.text("False Negative Rate selected : {0}".format(false_negative_rate))
         turnaround_time=st.sidebar.slider("Turnaround time (Steps for the test to complete)", min_value=0 , max_value=100 , value=0 , step=1, key=i)
         #st.sidebar.text("Turnaround time selected : {0}".format(turnaround_time))
-        capacity=st.sidebar.slider("Maximum tests done by Test {0} per day".format(i), min_value=1 , max_value=1000 , value=20 , step=1, key=i)
+        capacity=st.sidebar.slider("Maximum tests done by Test {0} per day".format(i+1), min_value=1 , max_value=1000 , value=20 , step=1, key=i)
         #st.sidebar.text("Maximum tests selected : {0}".format(capacity))
 
         machines['Test'+str(i+1)]['cost'] = cost
@@ -381,6 +387,7 @@ if __name__=="__main__":
     st.sidebar.write("------------------------------------------------------------------------------------")
 
     total_infection, total_quarantined_days, wrongly_quarantined_days = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
+    total_machine_cost = get_total_machine_cost(machines)
 
     latest_iteration.text('Ready!')
     bar.progress(0)
@@ -388,15 +395,13 @@ if __name__=="__main__":
 
     st.header("Cost")
     st.write("Goal is to minimise the cost function :")
-    st.write("Cost function =  a(Cumulative Infected persons) + b(Cumulative Wrongly Quarantined days) + c(Cumulative Rightly Quarantined Days)")
+    st.write("Cost function =  a(Cumulative Infected persons) + b(Cumulative Quarantined Days) + Cumulative Cost of Tests per day")
     st.write(" -- 'a' refers to medical cost per infected per day")
-    st.write(" -- 'b' refers to the loss by wrongly quarantining a healthy agent per day")
-    st.write(" -- 'c' refers to economic loss of lockdown of an agent per day")
+    st.write(" -- 'b' refers to economic loss of lockdown of an agent per day")
 
     st.write("------------------------------------------------------------------------------------")
 
     a=st.slider("Medical cost per infected per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
-    b=st.slider("Loss by wrongly quarantining a healthy agent per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
-    c=st.slider("Economic loss during lockdown per individual per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
+    b=st.slider("Economic loss during lockdown per individual per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
 
-    st.write("The Cumulative cost is "+str(a*total_infection+b*wrongly_quarantined_days+c*(total_quarantined_days - wrongly_quarantined_days)))
+    st.write("The Cumulative cost is "+str(a*total_infection+total_machine_cost*days+b*(total_quarantined_days)))
