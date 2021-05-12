@@ -1,2 +1,3 @@
 .DS_Store
 testing_stats.json
+__pycache__
