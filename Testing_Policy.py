@@ -37,6 +37,7 @@ class Machine():
         self.results = []
         self.available = True
         self.start_step = None
+        self.total_cost = 0
 
 
     def is_running(self):
@@ -71,6 +72,7 @@ class Machine():
     def register_testtube(self,testtube):
         testtube.set_in_machine(True)
         self.testtubes.append(testtube)
+        self.total_cost += self.cost
 
     def run_tests(self, infected_states, time_step):
         self.available = False

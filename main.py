@@ -157,6 +157,12 @@ class Simulate():
             agent.state=new_state
             self.state_list[agent.state].append(agent.index)
 
+    def get_total_machine_cost(self):
+        total = 0
+        for machine in self.testing_policy.machine_list:
+            total+=machine.total_cost
+        return total
+
 
 
 def world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown):
@@ -206,7 +212,7 @@ def world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,machines,testing_method
 
     sim_obj=Simulate(graph_obj,agents,transmission_prob,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
     sim_obj.simulate_days(days)
-    return sim_obj.state_history, agents
+    return sim_obj.state_history, agents, sim_obj.get_total_machine_cost()
 
 def average(tdict,number):
     for k in tdict.keys():
@@ -223,6 +229,7 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
     total_quarantined_days = 0
     wrongly_quarantined_days = 0
     total_infection = 0
+    total_machine_cost = 0
 
     for state in individual_types:
         tdict[state]=[0]*(days+1)
@@ -232,8 +239,8 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
         latest_iteration.text('Simulating World : {0}'.format(i+1))
         bar.progress(i + 1)
         graph_obj = RandomGraph(n,p,True)
-        sdict,agents = world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
-
+        sdict,agents,machine_cost = world(n,p,inf_per,days,graph_obj,beta,mu,gamma,delta,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
+        total_machine_cost += machine_cost
 
         for agent in agents:
             for truth in agent.quarantine_list:
@@ -254,10 +261,12 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
     total_infection /=number
     total_quarantined_days /=number
     wrongly_quarantined_days/=number
+    total_machine_cost/=number
 
     print("Total Infections : ",total_infection)
     print("Total quarantined days : ",total_quarantined_days)
     print("Wrongly quarantined days : ",wrongly_quarantined_days)
+    print("Total Test cost : ",total_machine_cost)
 
     values=[]
     keys=individual_types
@@ -272,14 +281,7 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
     columns=keys)
     st.line_chart(chart_data)
 
-    return total_infection, total_quarantined_days, wrongly_quarantined_days
-
-def get_total_machine_cost(machines):
-    total_cost = 0
-    for machine in machines.keys():
-        total_cost += machines[machine]['cost']
-    return total_cost
-
+    return total_infection, total_quarantined_days, wrongly_quarantined_days, total_machine_cost
 
 if __name__=="__main__":
 
@@ -386,8 +388,8 @@ if __name__=="__main__":
 
     st.sidebar.write("------------------------------------------------------------------------------------")
 
-    total_infection, total_quarantined_days, wrongly_quarantined_days = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
-    total_machine_cost = get_total_machine_cost(machines)
+    total_infection, total_quarantined_days,\
+    wrongly_quarantined_days, total_machine_cost = worlds(num_worlds,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,machines,testing_methods_list,option,num_agents_per_step,num_days_lockdown)
 
     latest_iteration.text('Ready!')
     bar.progress(0)
@@ -404,4 +406,4 @@ if __name__=="__main__":
     a=st.slider("Medical cost per infected per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
     b=st.slider("Economic loss during lockdown per individual per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
 
-    st.write("The Cumulative cost is "+str(a*total_infection+total_machine_cost*days+b*(total_quarantined_days)))
+    st.write("The Cumulative cost is "+str(a*total_infection+total_machine_cost+b*(total_quarantined_days)))
