@@ -286,8 +286,12 @@ if __name__=="__main__":
     random.seed(0)
     st.write("""
     # Testing Policy
-    Experiment with different testing policies with an SEIRS model on a G(n,p) random graph.
-    Use the sidebar to set parameters!
+    This simulator allows you to test different testing policies with an SEIRS model on a G(n,p) random graph. We have designed this application
+    as a simple point solution of the main simulator - [Episimmer](https://github.com/healthbadge/episimmer) to showcase it's functionality. Please
+    note that the main simulator can do a lot more than what is on this website right now and we made this application only for users to get a general
+    idea.
+
+    Anyway, Use the sidebar to set parameters. Have Fun :)
     """)
     st.write("------------------------------------------------------------------------------------")
 
