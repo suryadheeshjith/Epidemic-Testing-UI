@@ -235,7 +235,6 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
         tdict[state]=[0]*(days+1)
 
     for i in range(number):
-        random.seed(number)
         latest_iteration.text('Simulating World : {0}'.format(i+1))
         bar.progress(i + 1)
         graph_obj = RandomGraph(n,p,True)
@@ -284,7 +283,7 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
     return total_infection, total_quarantined_days, wrongly_quarantined_days, total_machine_cost
 
 if __name__=="__main__":
-
+    random.seed(0)
     st.write("""
     # Testing Policy
     Experiment with different testing policies with an SEIRS model on a G(n,p) random graph.
