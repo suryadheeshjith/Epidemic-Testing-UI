@@ -159,8 +159,9 @@ class Simulate():
 
     def get_total_machine_cost(self):
         total = 0
-        for machine in self.testing_policy.machine_list:
-            total+=machine.total_cost
+        if(self.machines):
+            for machine in self.testing_policy.machine_list:
+                total+=machine.total_cost
         return total
 
 
