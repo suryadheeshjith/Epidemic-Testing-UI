@@ -263,6 +263,8 @@ def worlds(number,n,p,inf_per,days,beta,mu,gamma,delta,latest_iteration,bar,mach
     wrongly_quarantined_days/=number
     total_machine_cost/=number
 
+    print("------------------------")
+    print("Number of agents : ", num_agents_per_step, testing_methods_list)
     print("Total Infections : ",total_infection)
     print("Total quarantined days : ",total_quarantined_days)
     print("Wrongly quarantined days : ",wrongly_quarantined_days)
