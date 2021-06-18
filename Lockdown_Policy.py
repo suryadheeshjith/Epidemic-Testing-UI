@@ -9,24 +9,26 @@ class agent_policy_based_lockdown():
         self.time_period = time_period
 
     def enact_policy(self,time_step,agents):
-        if self.do_lockdown_fn(time_step):
-            for agent in agents:
-                history = agent.testing_hist
-                if(len(history)):
-                    last_time_step = history[-1].time_step
-                    if(time_step - last_time_step <=self.time_period):
-                        result = self.get_accumulated_result(history,last_time_step)
-                        if(result in self.value_list):
-                            if(last_time_step==time_step):
-                                if(agent.state!="Infected"):
-                                    agent.quarantine_list.append("Wrong")
+        for agent in agents:
+            history = agent.testing_hist
+            if(len(history)):
+                last_time_step = history[-1].time_step
+                if(time_step - last_time_step < self.time_period):
+                    result = self.get_accumulated_result(history,last_time_step)
+                    if(result in self.value_list):
 
-                                else:
-                                    agent.quarantine_list.append("Right")
+                        if(time_step - history[-1].machine_start_step==history[-1].turnaround_time):
+                            if(agent.state!="Infected"):
+                                agent.quarantine_list.append("Wrong")
 
                             else:
-                                agent.quarantine_list.append(agent.quarantine_list[-1])
-                            agent.quarantined= True
+                                agent.quarantine_list.append("Right")
+
+                        else:
+
+                            agent.quarantine_list.append(agent.quarantine_list[-1])
+
+                        agent.quarantined= True
 
     def get_accumulated_result(self,history,last_time_step):
 

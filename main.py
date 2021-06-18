@@ -161,7 +161,7 @@ class Simulate():
         total = 0
         if(self.machines):
             for machine in self.testing_policy.machine_list:
-                total+=machine.total_cost
+                total+=machine.machine_cost
         return total
 
 
