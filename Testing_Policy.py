@@ -312,7 +312,7 @@ class Test_Policy():
                     if len(history)==0 or time_step - history[-1].time_step>=min_steps_since_last_test:
                         if attribute is None or contact.info[attribute] in value_list:
                             testtube = Testtube()
-                            testtube.register_agent(contact)
+                            testtube.register_agent(contact,time_step)
                             self.ready_queue.append(testtube)
                             cur_agents_to_test-=1
                             break
