@@ -413,3 +413,6 @@ if __name__=="__main__":
     b=st.slider("Economic loss during lockdown per individual per day", min_value=0 , max_value=100 , value=1 , step=1 , format=None , key=None )
 
     st.write("The Cumulative cost is "+str(a*total_infection+total_machine_cost+b*(total_quarantined_days)))
+    st.sidebar.markdown("# :clipboard: About")
+    st.sidebar.info("Make sure to check us out at [Episimmer](https://github.com/healthbadge/episimmer).\
+     For any questions regarding the implementation, bring up an issue [here](https://github.com/suryadheeshjith/Epidemic-Simulator-UI)!")
